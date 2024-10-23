@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+/* src/App.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+}
+
+.navbar-logo h1 {
+  margin: 0;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-cart {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contenedor {
+  padding: 2rem;
+  text-align: center;
+}
