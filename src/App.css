@@ -1,3 +1,4 @@
+/* Base */
 .App {
   text-align: center;
 }
@@ -36,16 +37,21 @@
     transform: rotate(360deg);
   }
 }
-/* src/App.css */
+
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #f8f9fa;
+  background-color: #007b8a; /* Celeste oscuro */
+  color: white;
 }
 
-.navbar-logo h1 {
+.navbar-logo h1,
+.navbar-links a,
+.navbar-cart {
+  color: white;
   margin: 0;
 }
 
@@ -55,17 +61,23 @@
   gap: 1rem;
 }
 
+.navbar-links a {
+  text-decoration: none;
+}
+
 .navbar-cart {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
+/* Contenedor */
 .contenedor {
   padding: 2rem;
   text-align: center;
 }
 
+/* Carrito */
 .cart-widget {
   display: flex;
   align-items: center;
@@ -82,4 +94,3 @@
   top: -5px;
   right: -10px;
 }
-
