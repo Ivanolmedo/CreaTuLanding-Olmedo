@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import CatalogoContainer from './containers/CatalogoContainer';
+import './App.css';
 
 function App() {
   return (
