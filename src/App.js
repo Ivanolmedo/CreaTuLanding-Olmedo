@@ -1,14 +1,17 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Contenedor from './components/Contenedor';
-import './App.css';
+import CatalogoContainer from './containers/CatalogoContainer';
 
 function App() {
   return (
-    <div className="App">
+    <Router>
       <Navbar />
-      <Contenedor mensaje="¡Bienvenido a nuestra tienda! Explora nuestros productos." />
-    </div>
+      <Routes>
+        <Route path="/" element={<CatalogoContainer />} />
+        {/* Otras rutas */}
+      </Routes>
+    </Router>
   );
 }
 
