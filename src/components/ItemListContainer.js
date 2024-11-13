@@ -1,43 +1,32 @@
-// src/components/ItemListContainer.js
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import ItemList from './ItemList';
+import { useParams } from 'react-router-dom';
 
-const products = [
-  { id: 1, category: 'abarrotes', name: 'Arroz' },
-  { id: 2, category: 'limpieza', name: 'Detergente' },
-  { id: 3, category: 'confites', name: 'Chocolates' },
-  { id: 4, category: 'abarrotes', name: 'Lentejas' },
-];
-
-function ItemListContainer() {
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const { categoryId } = useParams();
+const ItemListContainer = () => {
+  const [products, setProducts] = useState([]);
+  const { category } = useParams();
 
   useEffect(() => {
-    // Simular una llamada a API con promesa
-    const fetchProducts = new Promise((resolve) => {
-      setTimeout(() => {
-        if (categoryId) {
-          resolve(products.filter((product) => product.category === categoryId));
-        } else {
-          resolve(products);
-        }
-      }, 1000); // Simulación de un retraso de 1 segundo
-    });
+    const fetchProducts = async () => {
+      let url = 'https://dummyjson.com/products';
+      if (category) {
+        url += `/category/${category}`;
+      }
+      const response = await fetch(url);
+      const data = await response.json();
+      setProducts(data.products || []);
+    };
 
-    fetchProducts.then((result) => {
-      console.log("Filtered Products:", result); // Verificar en la consola
-      setFilteredProducts(result);
-    });
-  }, [categoryId]);
+    fetchProducts();
+  }, [category]);
 
   return (
     <div>
-      <h2>{categoryId ? `Categoría: ${categoryId}` : 'Todos los Productos'}</h2>
-      <ItemList items={filteredProducts} />
+      <h2>{category ? `Categoría: ${category}` : 'Todos los productos'}</h2>
+      <ItemList products={products} />
     </div>
   );
-}
+};
 
 export default ItemListContainer;
+

@@ -1,20 +1,18 @@
-// src/components/ItemList.js
 import React from 'react';
 import Item from './Item';
 
-function ItemList({ items }) {
-  if (items.length === 0) {
-    return <p>No hay productos disponibles.</p>; // Mensaje de estado vacío
+const ItemList = ({ products = [] }) => {
+  if (!products.length) {
+    return <p>No hay productos disponibles.</p>;
   }
 
   return (
     <div>
-      {items.map((item) => (
-        <Item key={item.id} name={item.name} />
+      {products.map((product) => (
+        <Item key={product.id} product={product} />
       ))}
     </div>
   );
-}
+};
 
 export default ItemList;
-
