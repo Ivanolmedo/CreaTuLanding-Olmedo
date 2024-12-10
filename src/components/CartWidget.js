@@ -1,12 +1,19 @@
-import React from 'react';
+// CartWidget.js
+import React from "react";
+import { useCart } from "../context/CartContext";
 
-function CartWidget() {
+const CartWidget = () => {
+  const { totalItems } = useCart();
+
   return (
     <div className="cart-widget">
-      <span role="img" aria-label="cart">🛒</span>
-      <span className="cart-notification">3</span> {/* Valor estático de ejemplo */}
+      <i className="fas fa-shopping-cart"></i>
+      {totalItems() > 0 && <span className="cart-notification">{totalItems()}</span>}
     </div>
   );
-}
+};
 
 export default CartWidget;
+
+
+

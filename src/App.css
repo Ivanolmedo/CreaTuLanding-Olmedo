@@ -26,22 +26,33 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1rem;
   background-color: #3b5998;
   color: white;
 }
 
-.navbar a {
+.navbar-logo {
   text-decoration: none;
   color: white;
-  padding: 0.5rem 1rem;
-  transition: background-color 0.3s ease;
+  font-size: 1.5rem;
 }
 
-.navbar a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
+.navbar-links {
+  display: flex;
+  gap: 1rem;
 }
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #ddd;
+}
+
 
 /* Contenedor de lista de productos */
 .contenedor {
