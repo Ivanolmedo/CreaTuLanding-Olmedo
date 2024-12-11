@@ -1,6 +1,6 @@
-// CartWidget.js
 import React from "react";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../components/CartContext";
+
 
 const CartWidget = () => {
   const { totalItems } = useCart();
@@ -8,7 +8,7 @@ const CartWidget = () => {
   return (
     <div className="cart-widget">
       <i className="fas fa-shopping-cart"></i>
-      {totalItems() > 0 && <span className="cart-notification">{totalItems()}</span>}
+      {totalItems > 0 && <span className="cart-notification">{totalItems}</span>}
     </div>
   );
 };

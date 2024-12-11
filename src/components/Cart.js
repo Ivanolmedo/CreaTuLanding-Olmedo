@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { collection, addDoc } from "firebase/firestore";
-import db from "../firebaseConfig";
+import { db } from "../firebaseConfig"; // Cambia esto
+
 
 const Cart = () => {
   const { cartItems, clearCart, totalPrice } = useCart();

@@ -1,7 +1,7 @@
 // ItemListContainer.js
 import React, { useState, useEffect } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import db from "../firebaseConfig"; // Conexión a Firebase
+import { db } from "../firebaseConfig";
 import { useParams } from "react-router-dom";
 import ItemList from "./ItemList";
 
