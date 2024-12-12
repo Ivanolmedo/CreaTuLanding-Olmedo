@@ -1,55 +1,57 @@
-// ItemListContainer.js
-import React, { useState, useEffect } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ItemList from "./ItemList";
+import { getProducts, getFilterProducts } from "../App";
+import "../App.css"; // Estilos principales
 
 const ItemListContainer = () => {
   const { category } = useParams();
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true);
+    const fetchData = async () => {
       try {
-        const productsRef = collection(db, "products");
-        let q;
-
-        if (category) {
-          q = query(productsRef, where("category", "==", category));
-        } else {
-          q = query(productsRef);
-        }
-
-        const querySnapshot = await getDocs(q);
-        const productsData = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        setProducts(productsData);
+        const fetchedProducts = category
+          ? await getFilterProducts(category)
+          : await getProducts();
+        setProducts(fetchedProducts);
       } catch (error) {
-        console.error("Error fetching products from Firestore", error);
-      } finally {
-        setLoading(false);
+        console.error("Error fetching products:", error);
       }
     };
 
-    fetchProducts();
+    fetchData();
   }, [category]);
 
-  if (loading) return <p>Cargando productos...</p>;
-
   return (
-    <div>
-      <h2>{category ? category.toUpperCase() : "Novedades"}</h2>
-      <ItemList products={products} />
+    <div className="item-list-container">
+      <h1>{category ? `Categoría: ${category}` : "Todos los productos"}</h1>
+      <div className="product-grid">
+        {products.map((product) => (
+          <div key={product.id} className="product-card">
+            <img 
+              src={product.imageId} 
+              alt={product.title} 
+              className="product-image" 
+              onError={(e) => (e.target.src = "fallback-image-url.jpg")} // Imagen de respaldo si falla
+            />
+            <h2 className="product-title">{product.title}</h2>
+            <p className="product-description">{product.description}</p>
+            <p className="product-price">${Number(product.price).toFixed(2)}</p>
+            <button className="add-to-cart-button">Agregar al carrito</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
 export default ItemListContainer;
+
+
+
+
+
+
+
 
 

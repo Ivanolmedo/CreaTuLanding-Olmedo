@@ -1,24 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import Item from './Item';
 
-const ItemList = ({ products }) => {
+function ItemList({ products }) {
   return (
     <div className="item-list">
       {products.map((product) => (
-        <div className="item" key={product.id}>
-          <img src={product.thumbnail} alt={product.title} />
-          <div className="item-details">
-            <h3>{product.title}</h3>
-            <p>{product.description}</p>
-            <p className="price">${product.price}</p>
-            <Link to={`/product/${product.id}`}>
-              <button>Ver Detalle</button>
-            </Link>
-          </div>
-        </div>
+        <Item
+          key={product.id}
+          id={product.id}
+          title={product.title}
+          description={product.description}
+          price={product.price}
+          image={product.imageId}
+          stock={product.stock}
+        />
       ))}
     </div>
   );
-};
+}
 
 export default ItemList;
+
+
+
+
+

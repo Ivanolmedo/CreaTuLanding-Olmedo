@@ -12,12 +12,9 @@ const firebaseConfig = {
   measurementId: "G-2ZQXBDH3JN",
 };
 
-// Inicializamos Firebase solo una vez
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-// Exportamos las instancias
-export { app, analytics, db }; // Original
-export const firebaseApp = app; // Alias opcional para firebaseApp
-
+export { app, analytics, db }; 
+export const firebaseApp = app;
