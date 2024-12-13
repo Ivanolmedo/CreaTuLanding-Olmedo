@@ -13,16 +13,11 @@ import "./App.css";
 // Función para obtener todos los productos
 export const getProducts = async () => {
   try {
-    console.log("Obteniendo productos...");
     const documents = await getDocs(collection(db, "items"));
-    const products = [];
-
-    documents.forEach((doc) => {
-      console.log("Producto encontrado:", doc.id, doc.data());
-      products.push({ id: doc.id, ...doc.data() });
-    });
-
-    console.log("Productos obtenidos:", products);
+    const products = documents.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
     return products;
   } catch (error) {
     console.error("Error obteniendo productos:", error);
@@ -30,21 +25,15 @@ export const getProducts = async () => {
   }
 };
 
-
 // Función para obtener productos filtrados por categoría
 export const getFilterProducts = async (category) => {
   try {
-    console.log(`Filtrando productos por categoría: ${category}`);
-    const q = query(collection(db, "items"), where("category", "==", category));
+    const q = query(collection(db, "items"), where("categoryId", "==", category));
     const querySnapshot = await getDocs(q);
-    const filteredProducts = [];
-
-    querySnapshot.forEach((doc) => {
-      console.log("Producto filtrado:", doc.id, doc.data());
-      filteredProducts.push({ id: doc.id, ...doc.data() });
-    });
-
-    console.log("Productos filtrados:", filteredProducts);
+    const filteredProducts = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
     return filteredProducts;
   } catch (error) {
     console.error("Error obteniendo productos filtrados:", error);
@@ -75,11 +64,10 @@ const App = () => {
           <NavBar />
           <Routes>
             <Route path="/" element={<ItemListContainer products={products} />} /> {/* Vista principal */}
-            <Route path="/category/:category" 
-              element={<ItemListContainer 
-                fetchProductsByCategory={getFilterProducts} 
-              />} 
-            /> {/* Categorías */}
+            <Route
+              path="/category/:category"
+              element={<ItemListContainer />} // El componente manejará la lógica de filtrado
+            />
             <Route path="/product/:id" element={<ItemDetailContainer />} /> {/* Detalle de producto */}
             <Route path="/cart" element={<Cart />} /> {/* Carrito */}
             <Route path="/checkout" element={<Checkout />} /> {/* Checkout */}
