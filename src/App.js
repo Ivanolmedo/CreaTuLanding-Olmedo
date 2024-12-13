@@ -47,7 +47,7 @@ const App = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const productsList = await getProducts(); // Llama a la función para obtener productos
+        const productsList = await getProducts(); 
         setProducts(productsList);
       } catch (error) {
         console.error("Error al cargar productos:", error);
@@ -58,19 +58,19 @@ const App = () => {
   }, []);
 
   return (
-    <CartProvider> {/* Proveedor del contexto del carrito */}
+    <CartProvider> {}
       <Router>
         <div className="App">
           <NavBar />
           <Routes>
-            <Route path="/" element={<ItemListContainer products={products} />} /> {/* Vista principal */}
+            <Route path="/" element={<ItemListContainer products={products} />} /> {}
             <Route
               path="/category/:category"
-              element={<ItemListContainer />} // El componente manejará la lógica de filtrado
+              element={<ItemListContainer />} 
             />
-            <Route path="/product/:id" element={<ItemDetailContainer />} /> {/* Detalle de producto */}
-            <Route path="/cart" element={<Cart />} /> {/* Carrito */}
-            <Route path="/checkout" element={<Checkout />} /> {/* Checkout */}
+            <Route path="/product/:id" element={<ItemDetailContainer />} /> {}
+            <Route path="/cart" element={<Cart />} /> {}
+            <Route path="/checkout" element={<Checkout />} /> {}
           </Routes>
         </div>
       </Router>
